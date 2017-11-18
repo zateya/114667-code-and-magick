@@ -33,6 +33,8 @@ window.renderStatistics = function (ctx, names, times) {
   var barWidth = 40;
   var indent = 50;
   var barColor;
+  var barOpacityMin = 0.3;
+  var barOpacityMax = 1;
   var userBarColor = 'rgba(255, 0, 0, 1)';
   var initialX = 150;
   var initialY = 80;
@@ -41,7 +43,8 @@ window.renderStatistics = function (ctx, names, times) {
   var defaultBarColor = '2, 14, 134'; // Red, Blue, Green
 
   var getDefaultBarColor = function () {
-    return 'rgba(' + defaultBarColor + ', ' + Math.random() + ')';
+    var barOpacity = Math.random() * (barOpacityMax - barOpacityMin) + barOpacityMin;
+    return 'rgba(' + defaultBarColor + ', ' + barOpacity + ')';
   };
 
   for (var t = 0; t < times.length; t++) {
