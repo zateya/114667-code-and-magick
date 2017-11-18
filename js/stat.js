@@ -40,7 +40,7 @@ window.renderStatistics = function (ctx, names, times) {
   var initialY = 80;
   var lineHeight = 20;
 
-  var defaultBarColor = '2, 14, 134'; // Red, Blue, Green
+  var defaultBarColor = '2, 14, 134'; // Red, Green, Blue
 
   var getDefaultBarColor = function () {
     var barOpacity = Math.random() * (barOpacityMax - barOpacityMin) + barOpacityMin;
