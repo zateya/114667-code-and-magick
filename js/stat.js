@@ -2,9 +2,9 @@
 
 var max = -1;
 
-var getMaxElement = function (array) {
-  for (var i = 0; i < array.length; i++) {
-    var element = array[i];
+var getMaxElement = function (elements) {
+  for (var i = 0; i < elements.length; i++) {
+    var element = elements[i];
     if (element > max) {
       max = element;
     }
