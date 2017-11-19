@@ -1,19 +1,18 @@
 'use strict';
 
-var max = -1;
-
 var getMaxElement = function (elements) {
+  var max = -1;
   for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
     if (element > max) {
       max = element;
     }
   }
+  return max;
 };
 
 window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-  ctx.strokeRect(110, 20, 420, 270);
   ctx.fillRect(110, 20, 420, 270);
 
   ctx.fillStyle = 'rgba(256, 256, 256, 1.0)';
@@ -26,13 +25,10 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 120, 40);
   ctx.fillText('Список результатов:', 120, 60);
 
-  getMaxElement(times);
-
   var histogramHeight = 150;
-  var step = histogramHeight / max;
+  var step = histogramHeight / getMaxElement(times);
   var barWidth = 40;
   var indent = 50;
-  var barColor;
   var barOpacityMin = 0.3;
   var barOpacityMax = 1;
   var userBarColor = 'rgba(255, 0, 0, 1)';
@@ -48,8 +44,7 @@ window.renderStatistics = function (ctx, names, times) {
   };
 
   for (var t = 0; t < times.length; t++) {
-    barColor = (names[t] === 'Вы') ? userBarColor : getDefaultBarColor();
-    ctx.fillStyle = barColor;
+    ctx.fillStyle = (names[t] === 'Вы') ? userBarColor : getDefaultBarColor();
     ctx.fillRect(initialX + indent * t + barWidth * t, initialY + histogramHeight - times[t] * step + lineHeight, barWidth, times[t] * step - lineHeight / 2);
     ctx.fillStyle = '#000';
     ctx.fillText(Math.round(times[t]), initialX + indent * t + barWidth * t, initialY + histogramHeight - times[t] * step + lineHeight / 2);
