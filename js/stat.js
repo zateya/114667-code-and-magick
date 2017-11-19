@@ -32,8 +32,8 @@ window.renderStatistics = function (ctx, names, times) {
   var barOpacityMin = 0.3;
   var barOpacityMax = 1;
   var userBarColor = 'rgba(255, 0, 0, 1)';
-  var initialX = 150;
-  var initialY = 80;
+  var initialX = 155;
+  var initialY = 85;
   var lineHeight = 20;
 
   var defaultBarColor = '2, 14, 134'; // Red, Green, Blue
@@ -45,9 +45,9 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var t = 0; t < times.length; t++) {
     ctx.fillStyle = (names[t] === 'Вы') ? userBarColor : getDefaultBarColor();
-    ctx.fillRect(initialX + indent * t + barWidth * t, initialY + histogramHeight - times[t] * step + lineHeight, barWidth, times[t] * step - lineHeight / 2);
+    ctx.fillRect(initialX + indent * t + barWidth * t, initialY + histogramHeight - times[t] * step + lineHeight / 2, barWidth, times[t] * step);
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[t]), initialX + indent * t + barWidth * t, initialY + histogramHeight - times[t] * step + lineHeight / 2);
+    ctx.fillText(Math.round(times[t]), initialX + indent * t + barWidth * t, initialY + histogramHeight - times[t] * step);
     ctx.fillText(names[t], initialX + indent * t + barWidth * t, initialY + histogramHeight + lineHeight * 1.5);
   }
 };
