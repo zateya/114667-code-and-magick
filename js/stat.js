@@ -29,7 +29,7 @@ window.renderStatistics = function (ctx, names, times) {
   getMaxElement(times);
 
   var histogramHeight = 150;
-  var step = histogramHeight / (max - 0);
+  var step = histogramHeight / max;
   var barWidth = 40;
   var indent = 50;
   var barColor;
