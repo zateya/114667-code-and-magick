@@ -29,10 +29,12 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 120, 40);
   ctx.fillText('Список результатов:', 120, 60);
 
+  var max = getMaxElement(times);
+
   var histogram = {
     height: 150,
-    step: function () {
-      return histogram.height / getMaxElement(times);
+    getStep: function () {
+      return histogram.height / max;
     },
     barWidth: 40,
     userBarColor: 'rgba(255, 0, 0, 1)',
@@ -45,14 +47,14 @@ window.renderStatistics = function (ctx, names, times) {
     lineHeight: 20,
   };
 
-  for (var t = 0; t < times.length; t++) {
-    ctx.fillStyle = (names[t] === 'Вы') ? histogram.userBarColor : histogram.getDefaultBarColor();
-    var barHeight = times[t] * histogram.step();
-    var barX = histogram.initialX + histogram.indent * t + histogram.barWidth * t;
+  for (var i = 0; i < times.length; i++) {
+    ctx.fillStyle = (names[i] === 'Вы') ? histogram.userBarColor : histogram.getDefaultBarColor();
+    var barHeight = times[i] * histogram.getStep();
+    var barX = histogram.initialX + histogram.indent * i + histogram.barWidth * i;
     var barY = histogram.initialY + histogram.height - barHeight;
     ctx.fillRect(barX, barY + histogram.lineHeight / 2, histogram.barWidth, barHeight);
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[t]), barX, barY);
-    ctx.fillText(names[t], barX, histogram.initialY + histogram.height + histogram.lineHeight * 1.5);
+    ctx.fillText(Math.round(times[i]), barX, barY);
+    ctx.fillText(names[i], barX, histogram.initialY + histogram.height + histogram.lineHeight * 1.5);
   }
 };
