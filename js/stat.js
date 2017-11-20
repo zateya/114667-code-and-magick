@@ -16,18 +16,27 @@ var getRandomValue = function (minValue, maxValue) {
 };
 
 window.renderStatistics = function (ctx, names, times) {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-  ctx.fillRect(110, 20, 420, 270);
 
-  ctx.fillStyle = 'rgba(256, 256, 256, 1.0)';
-  ctx.strokeRect(100, 10, 420, 270);
-  ctx.fillRect(100, 10, 420, 270);
+  var drawRect = function (x, y, width, height, color, strokeColor) {
+    ctx.fillStyle = color || 'white';
+    ctx.fillRect(x, y, width, height);
+    if (strokeColor) {
+      ctx.strokeStyle = strokeColor;
+      ctx.strokeRect(x, y, width, height);
+    }
+  };
 
-  ctx.fillStyle = '#000';
-  ctx.font = '16px PT Mono';
+  var drawText = function (text, x, y, font, color) {
+    ctx.fillStyle = color || 'black';
+    ctx.font = font || '16px PT Mono';
+    ctx.fillText(text, x, y);
+  };
 
-  ctx.fillText('Ура вы победили!', 120, 40);
-  ctx.fillText('Список результатов:', 120, 60);
+  drawRect(110, 20, 420, 270, 'rgba(0, 0, 0, 0.7)');
+  drawRect(100, 10, 420, 270, 'white', 'black');
+
+  drawText('Ура вы победили!', 120, 40);
+  drawText('Список результатов:', 120, 60);
 
   var max = getMaxElement(times);
 
@@ -49,12 +58,11 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var i = 0; i < times.length; i++) {
     var barHeight = times[i] * histogram.getStep();
-    var barX = histogram.initialX + histogram.indent * i + histogram.barWidth * i;
+    var barX = histogram.initialX + (histogram.barWidth + histogram.indent) * i;
     var barY = histogram.initialY + histogram.height - barHeight;
-    ctx.fillStyle = (names[i] === 'Вы') ? histogram.userBarColor : histogram.getDefaultBarColor();
-    ctx.fillRect(barX, barY + histogram.lineHeight / 2, histogram.barWidth, barHeight);
-    ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[i]), barX, barY);
-    ctx.fillText(names[i], barX, histogram.initialY + histogram.height + histogram.lineHeight * 1.5);
+    var barColor = (names[i] === 'Вы') ? histogram.userBarColor : histogram.getDefaultBarColor();
+    drawRect(barX, barY + histogram.lineHeight / 2, histogram.barWidth, barHeight, barColor);
+    drawText(Math.round(times[i]), barX, barY);
+    drawText(names[i], barX, histogram.initialY + histogram.height + histogram.lineHeight * 1.5);
   }
 };
