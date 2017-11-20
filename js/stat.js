@@ -48,10 +48,10 @@ window.renderStatistics = function (ctx, names, times) {
   };
 
   for (var i = 0; i < times.length; i++) {
-    ctx.fillStyle = (names[i] === 'Вы') ? histogram.userBarColor : histogram.getDefaultBarColor();
     var barHeight = times[i] * histogram.getStep();
     var barX = histogram.initialX + histogram.indent * i + histogram.barWidth * i;
     var barY = histogram.initialY + histogram.height - barHeight;
+    ctx.fillStyle = (names[i] === 'Вы') ? histogram.userBarColor : histogram.getDefaultBarColor();
     ctx.fillRect(barX, barY + histogram.lineHeight / 2, histogram.barWidth, barHeight);
     ctx.fillStyle = '#000';
     ctx.fillText(Math.round(times[i]), barX, barY);
