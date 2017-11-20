@@ -27,8 +27,8 @@ window.renderStatistics = function (ctx, names, times) {
   };
 
   var drawText = function (text, x, y, font, color) {
-    ctx.font = font || '16px PT Mono';
     ctx.fillStyle = color || 'black';
+    ctx.font = font || '16px PT Mono';
     ctx.fillText(text, x, y);
   };
 
@@ -57,9 +57,9 @@ window.renderStatistics = function (ctx, names, times) {
   };
 
   for (var i = 0; i < times.length; i++) {
+    var barHeight = times[i] * histogram.getStep();
     var barX = histogram.initialX + (histogram.barWidth + histogram.indent) * i;
     var barY = histogram.initialY + histogram.height - barHeight;
-    var barHeight = times[i] * histogram.getStep();
     var barColor = (names[i] === 'Вы') ? histogram.userBarColor : histogram.getDefaultBarColor();
     drawRect(barX, barY + histogram.lineHeight / 2, histogram.barWidth, barHeight, barColor);
     drawText(Math.round(times[i]), barX, barY);
