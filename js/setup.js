@@ -53,7 +53,7 @@ var openPopup = function () {
   userNameField.addEventListener('invalid', onUserNameFieldInvalid);
   userNameField.addEventListener('input', onUserNameFieldInput);
   setupPlayer.addEventListener('click', onSetupPlayerClick);
-  setup.addEventListener('click', onSetupSubmitClick);
+  setupSubmit.addEventListener('click', onSetupSubmitClick);
 };
 
 var closePopup = function () {
@@ -62,7 +62,7 @@ var closePopup = function () {
   userNameField.removeEventListener('invalid', onUserNameFieldInvalid);
   userNameField.removeEventListener('input', onUserNameFieldInput);
   setupPlayer.removeEventListener('click', onSetupPlayerClick);
-  setup.removeEventListener('click', onSetupSubmitClick);
+  setupSubmit.removeEventListener('click', onSetupSubmitClick);
 };
 
 setupOpen.addEventListener('click', function () {
@@ -85,10 +85,8 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-var onSetupSubmitClick = function (evt) {
-  if (evt.target === setupSubmit) {
-    closePopup();
-  }
+var onSetupSubmitClick = function () {
+  closePopup();
 };
 
 // Валидация длины текста в поле Имени персонажа
