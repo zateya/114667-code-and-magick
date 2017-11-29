@@ -61,7 +61,7 @@ var closePopup = function () {
   document.removeEventListener('keydown', onPopupEscPress);
   userNameField.removeEventListener('invalid', onUserNameFieldInvalid);
   userNameField.removeEventListener('input', onUserNameFieldInput);
-  setup.removeEventListener('click', onSetupPlayerClick);
+  setupPlayer.removeEventListener('click', onSetupPlayerClick);
   setup.removeEventListener('click', onSetupSubmitClick);
 };
 
