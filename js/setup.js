@@ -18,11 +18,14 @@ var WIZARDS_COUNT = 4;
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 
-var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
+
+var setupForm = setup.querySelector('.setup-wizard-form');
 var userNameField = setup.querySelector('.setup-user-name');
 var setupSubmit = setup.querySelector('.setup-submit');
+
 var setupSimilarElement = setup.querySelector('.setup-similar');
 var similarListElement = setup.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
@@ -86,7 +89,9 @@ setupClose.addEventListener('keydown', function (evt) {
 });
 
 var onSetupSubmitClick = function () {
-  closePopup();
+  if (userNameField.checkValidity()) {
+    setupForm.submit();
+  }
 };
 
 // Валидация длины текста в поле Имени персонажа
